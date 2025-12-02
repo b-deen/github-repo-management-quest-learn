@@ -41,63 +41,63 @@ jobs:
           mkdir -p docs/sample-changes
 
           # Add a new tutorial file
-          cat > docs/sample-changes/new-tutorial.md << 'EOF'
-# Advanced Integration Tutorial
-
-This tutorial shows you how to integrate TechFlow with external services.
-
-## Prerequisites
-- TechFlow 2.1.0 or later
-- API key configured
-- Basic Python knowledge
-
-## Step 1: Setup Integration
-
-First, install the integration package:
-
-```bash
-pip install techflow-integrations
-```
-
-## Step 2: Configure Connection
-
-Create a configuration file:
-
-```python
-from techflow import Client
-from techflow.integrations import ServiceConnector
-
-client = Client(api_key='your_key')
-connector = ServiceConnector(client)
-```
-
-## Step 3: Test Connection
-
-Verify the integration works:
-
-```python
-result = connector.test_connection()
-print(result)
-```
-
-## Common Issues
-
-### Connection Timeout
-If you see timeout errors, increase the timeout value:
-
-```python
-connector = ServiceConnector(client, timeout=60)
-```
-
-### Authentication Failed
-Make sure your API key has integration permissions.
-
-## Next Steps
-
-- Try the error handling guide
-- Explore advanced features
-- Read the API reference
-EOF
+          cat > docs/sample-changes/new-tutorial.md << 'END_OF_FILE'
+          # Advanced Integration Tutorial
+          
+          This tutorial shows you how to integrate TechFlow with external services.
+          
+          ## Prerequisites
+          - TechFlow 2.1.0 or later
+          - API key configured
+          - Basic Python knowledge
+          
+          ## Step 1: Setup Integration
+          
+          First, install the integration package:
+          
+          ```bash
+          pip install techflow-integrations
+          ```
+          
+          ## Step 2: Configure Connection
+          
+          Create a configuration file:
+          
+          ```python
+          from techflow import Client
+          from techflow.integrations import ServiceConnector
+          
+          client = Client(api_key='your_key')
+          connector = ServiceConnector(client)
+          ```
+          
+          ## Step 3: Test Connection
+          
+          Verify the integration works:
+          
+          ```python
+          result = connector.test_connection()
+          print(result)
+          ```
+          
+          ## Common Issues
+          
+          ### Connection Timeout
+          If you see timeout errors, increase the timeout value:
+          
+          ```python
+          connector = ServiceConnector(client, timeout=60)
+          ```
+          
+          ### Authentication Failed
+          Make sure your API key has integration permissions.
+          
+          ## Next Steps
+          
+          - Try the error handling guide
+          - Explore advanced features
+          - Read the API reference
+          END_OF_FILE
 
           # Modify an existing file (simulate update)
           echo "" >> README.md
@@ -107,34 +107,34 @@ EOF
           echo "- Updated API documentation" >> README.md
 
           # Add a file with an intentional issue (for review practice)
-          cat > docs/sample-changes/quick-reference.md << 'EOF'
-# Quick Reference Guide
-
-## Installation
-
-Requires Python 2.7 or later
-
-## Basic Commands
-
-```
-techflow init
-techflow start
-techflow stop
-```
-
-## Configuration
-
-Edit the config file located at: ~/techflow/config.yml
-
-## Links
-
-- [Setup Guide](guides/legacy-setup.md)
-- [API Docs](http://old-docs.example.com)
-
-## Troubleshooting
-
-If you experiance issues, check the logs.
-EOF
+          cat > docs/sample-changes/quick-reference.md << 'END_OF_FILE'
+          # Quick Reference Guide
+          
+          ## Installation
+          
+          Requires Python 2.7 or later
+          
+          ## Basic Commands
+          
+          ```
+          techflow init
+          techflow start
+          techflow stop
+          ```
+          
+          ## Configuration
+          
+          Edit the config file located at ~/techflow/config.yml
+          
+          ## Links
+          
+          - [Setup Guide](guides/legacy-setup.md)
+          - [API Docs](http://old-docs.example.com)
+          
+          ## Troubleshooting
+          
+          If you experiance issues, check the logs.
+          END_OF_FILE
 
       - name: Commit changes
         run: |
@@ -171,57 +171,57 @@ EOF
               title: '[Quest Sample] Add advanced integration tutorials',
               head: branchName,
               base: 'main',
-              body: `## Description
+              body: \`## Description
 
-This PR adds comprehensive integration documentation for TechFlow, including:
+            This PR adds comprehensive integration documentation for TechFlow, including:
 
-- New advanced integration tutorial
-- Quick reference guide for common commands
-- Updated README with recent changes
+            - New advanced integration tutorial
+            - Quick reference guide for common commands  
+            - Updated README with recent changes
 
-## Changes Made
+            ## Changes Made
 
-### New Files
-- \`docs/sample-changes/new-tutorial.md\` - Step-by-step integration guide
-- \`docs/sample-changes/quick-reference.md\` - Quick command reference
+            ### New Files
+            - docs/sample-changes/new-tutorial.md - Step-by-step integration guide
+            - docs/sample-changes/quick-reference.md - Quick command reference
 
-### Modified Files
-- \`README.md\` - Added recent updates section
+            ### Modified Files
+            - README.md - Added recent updates section
 
-## Testing
-- [x] All code examples tested
-- [x] Links verified
-- [x] Spell checked
-- [ ] Reviewed by documentation team
+            ## Testing
+            - [x] All code examples tested
+            - [x] Links verified
+            - [x] Spell checked
+            - [ ] Reviewed by documentation team
 
-## Screenshots
-N/A - Documentation only
+            ## Screenshots
+            N/A - Documentation only
 
-## Notes for Reviewers
+            ## Notes for Reviewers
 
-Please pay special attention to:
-- Technical accuracy of integration examples
-- Completeness of troubleshooting section
-- Link validity
+            Please pay special attention to:
+            - Technical accuracy of integration examples
+            - Completeness of troubleshooting section
+            - Link validity
 
-## Related Issues
-Closes #123
+            ## Related Issues
+            Closes #123
 
----
+            ---
 
-**⚠️ This is a sample PR for Quest Scenario 2**
+            **⚠️ This is a sample PR for Quest Scenario 2**
 
-This PR intentionally includes some issues for review practice:
-- Outdated Python version reference (Python 2.7)
-- Broken link to legacy-setup.md
-- Link to old domain (old-docs.example.com)
-- Typo: "experiance" instead of "experience"
+            This PR intentionally includes some issues for review practice:
+            - Outdated Python version reference (Python 2.7)
+            - Broken link to legacy-setup.md
+            - Link to old domain (old-docs.example.com)
+            - Typo: "experiance" instead of "experience"
 
-Use GitHub Copilot to:
-1. Review this PR with @workspace
-2. Identify the issues
-3. Generate constructive feedback
-4. Suggest fixes`,
+            Use GitHub Copilot to:
+            1. Review this PR with @workspace
+            2. Identify the issues
+            3. Generate constructive feedback
+            4. Suggest fixes\`,
               labels: ['quest-sample', 'documentation']
             });
 
