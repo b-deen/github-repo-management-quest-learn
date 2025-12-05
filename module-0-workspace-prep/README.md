@@ -8,6 +8,7 @@ Before diving into repository management scenarios, you'll learn how to customiz
 **Difficulty:** Beginner to Intermediate
 
 > **📚 Two-Part Lab Structure:** This module is split across both parts of the quest:
+>
 > - **[Part 1](../part-1-fundamentals/README.md)** covers Task 0.1 (Introduction) - essential concepts
 > - **[Part 2](../part-2-advanced/README.md)** covers Tasks 0.2-0.4 (Advanced) - building custom agents and prompts
 
@@ -33,9 +34,21 @@ By completing this module, you will:
 - VS Code with GitHub Copilot extension active
 - Understanding of markdown and basic Git concepts
 
+## Keeping Your Fork Up to Date
+
+If you forked this repository, keep it synced with the latest changes:
+
+1. Navigate to **your fork** on GitHub.com
+2. Look for the banner that says "This branch is X commits behind..."
+3. Click **Sync fork** → **Update branch**
+4. Pull the changes to your local clone (in VS Code terminal or Git client)
+
+> **💡 Tip:** GitHub will show a notification banner when your fork falls behind the original repository. Sync regularly to get the latest content and fixes.
+
 ## Module Structure
 
 ### Task 0.1: Introduction to Agents and Prompts
+
 Learn the fundamentals of workspace customization and see examples in action.
 
 ## Getting Started
