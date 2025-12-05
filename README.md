@@ -6,17 +6,6 @@ Welcome to the **GitHub Copilot for Repository Management Quest** - an interacti
 
 **What makes this quest unique:** You'll work with actual Microsoft Learn modules while mastering GitHub Copilot's workspace agent, issue analysis, PR summarization, and automated code generation features.
 
-## 🎯 Two-Part Lab Structure
-
-This quest is designed as **two 60-minute labs** that can be completed independently or as a full learning experience:
-
-| Lab | Duration | Focus | Scenarios |
-|-----|----------|-------|-----------|
-| **[Part 1: Fundamentals](part-1-fundamentals/README.md)** | 60 min | Core Copilot skills | Workspace setup + Scenarios 1-2 |
-| **[Part 2: Advanced](part-2-advanced/README.md)** | 60 min | Advanced automation | Custom agents + Scenarios 3-4 |
-
-**Start here:** Choose the lab that matches your experience level and time available!
-
 ## Learning Objectives
 
 By completing this quest, you will:
