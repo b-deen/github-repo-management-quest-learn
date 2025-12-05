@@ -38,33 +38,12 @@ By completing this module, you will:
 ### Task 0.1: Introduction to Agents and Prompts
 Learn the fundamentals of workspace customization and see examples in action.
 
-### Task 0.2: Creating Your First Agent
-Build a simple documentation-focused agent from scratch.
-
-### Task 0.3: Building a Prompt Library
-Create reusable prompt templates for common documentation tasks.
-
-### Task 0.4: Testing and Optimization
-Test your agents and prompts, then optimize them for better performance.
-
 ## Getting Started
 
 1. **Open this repository** in VS Code
 2. **Ensure GitHub Copilot is active** (look for the Copilot icon in the status bar)
 3. **Start with Task 0.1** in the `tasks/` directory
 4. **Follow each task sequentially** - they build on each other
-
-## Files You'll Create
-
-By the end of this module, your workspace will include:
-
-```
-.agents                 # Custom agent definitions
-.prompts               # Reusable prompt templates
-module-0-workspace-prep/
-├── my-agents-config.md    # Your agent documentation
-└── my-prompts-library.md  # Your prompt collection
-```
 
 ## Ready to Begin?
 
