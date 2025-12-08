@@ -94,4 +94,4 @@ Ready to build your agent arsenal? Begin with [Task 4.1: Advanced Agent Design](
 
 ---
 
-**Note:** This scenario builds on the agents and prompts created in Module 0. Make sure you have a working `.agents` and `.prompts` configuration before starting.
+**Note:** This scenario builds on the agents and prompts created in Module 0. Make sure you have working agents (`.agent.md` files in `.github/agents/`) and prompts (`.prompt.md` files in `.github/prompts/`) configured before starting.
