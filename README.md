@@ -53,7 +53,7 @@ This quest uses **real Microsoft Learn modules** in the `learn-pr/wwl/` folder a
 | **Location** | `.github/agents/` | `.github/prompts/` | `.github/copilot-instructions.md` or `.github/instructions/` | GitHub Actions or Copilot CLI |
 | **Format** | `.agent.md` (Markdown + YAML frontmatter) | `.prompt.md` (Markdown + YAML) | Markdown (with optional `applyTo` frontmatter for path-specific) | YAML workflow files |
 | **Scope** | Repo-specific or user profile | Repo-specific | Repo-wide or path-specific | Repo or org |
-| **Recognition** | Appears in Copilot Chat agent dropdown | Attach via + icon or type `#prompt:` | Applies automatically based on context | Executes jobs automatically |
+| **Recognition** | Appears in Copilot Chat agent dropdown | Type `#prompt:` in chat or click **Add Context** | Applies automatically based on context | Executes jobs automatically |
 | **Use Case** | Specialized roles (e.g., Security Reviewer, Docs Writer) | Quick tasks (e.g., Generate tests) | Set tone or coding standards | Automate CI/CD or scripted tasks |
 
 > **New Features (VS Code 1.106+):**

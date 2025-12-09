@@ -75,9 +75,8 @@ Execute a complete content publication validation workflow:
 Run this workflow on sample content by attaching the prompt file:
 
 1. Open Copilot Chat
-2. Click the **Attach context** button (📎)
-3. Select **Prompt...** and choose `content-publication-pipeline`
-4. Add your query: `@workspace Evaluate scenario-1-inheritance/challenge-repo/docs/getting-started.md for publication readiness`
+2. Type `#prompt:` and select `content-publication-pipeline`
+3. Add your query: `@workspace Evaluate scenario-1-inheritance/challenge-repo/docs/getting-started.md for publication readiness`
 
 ## Workflow 2: Repository Health Assessment
 
@@ -134,7 +133,7 @@ Conduct a complete repository health assessment using parallel analysis:
 ### Test the Health Assessment
 
 1. Open Copilot Chat
-2. Click **Attach context** → **Prompt...** → select `repository-health-check`
+2. Type `#prompt:` and select `repository-health-check`
 3. Add: `@workspace Conduct a complete health assessment of this repository`
 
 ## Workflow 3: Issue Resolution Workflow

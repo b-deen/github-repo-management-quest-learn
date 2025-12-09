@@ -311,10 +311,10 @@ Try these commands in Copilot Chat:
 
 To use a prompt file in VS Code:
 
-1. Click the **Attach context** icon (📎) at the bottom of Chat
-2. Select **Prompt...** from the dropdown
-3. Choose your prompt file (e.g., `content-audit`)
-4. Optionally add more context or type additional instructions
+1. In Copilot Chat, type `#prompt:` to see available prompts
+2. Select your prompt file (e.g., `content-audit`)
+3. Optionally add more context by typing `#file:` or clicking **Add Context**
+4. Type any additional instructions
 5. Submit the prompt
 
 Alternatively, in JetBrains IDEs, type `/prompt-name` directly (e.g., `/content-audit`).

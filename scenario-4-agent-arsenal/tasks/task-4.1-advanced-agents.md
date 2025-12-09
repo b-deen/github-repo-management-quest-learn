@@ -231,10 +231,9 @@ Present consolidated results with prioritized recommendations.
 
 **To use this workflow:**
 
-1. Click **Attach context** (📎) in Copilot Chat
-2. Select **Prompt...** → `comprehensive-review`
-3. Also attach the folder or files you want to analyze
-4. Submit to run the multi-agent analysis
+1. In Copilot Chat, type `#prompt:` and select `comprehensive-review`
+2. Also attach the folder or files you want to analyze (click **Add Context** or type `#file:`)
+3. Submit to run the multi-agent analysis
 
 ## Success Criteria
 
