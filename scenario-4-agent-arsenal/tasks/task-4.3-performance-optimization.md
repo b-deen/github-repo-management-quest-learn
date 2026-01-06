@@ -1,264 +1,336 @@
-# Task 4.3: Performance Optimization
+# Task 4.3: Advanced Custom Agents
 
 ## Objective
 
-Optimize your agents for speed, accuracy, and resource efficiency in large-scale operations.
+Create specialized custom agents for complex workflows that go **beyond what native Copilot features provide**. Only build these when custom instructions aren't sufficient.
 
-## Your Challenge
+## When to Build Custom Agents
 
-Fine-tune your agent arsenal for enterprise-scale performance and reliability.
+| Scenario | Recommended Approach |
+|----------|---------------------|
+| PR code review | ✅ Native Copilot Code Review + Custom Instructions |
+| Issue implementation | ✅ Copilot Coding Agent |
+| Style enforcement | ✅ Custom Instructions |
+| **Strategic content analysis** | 🔧 Custom Agent |
+| **Specialized domain expertise** | 🔧 Custom Agent |
+| **Multi-step coordinated workflows** | 🔧 Custom Agent |
 
-## Performance Optimization Strategies
+## Custom Agent Architecture
 
-### 1. Agent Response Optimization
+Custom agents in VS Code Copilot use `.agent.md` files in `.github/agents/`.
 
-Create an optimized version of your content strategist agent. Create a file named `content-strategist-v2.agent.md` in your `.github/agents/` folder:
-
-```markdown
----
-name: Content Strategist V2
-description: High-performance content strategy specialist optimized for speed and accuracy
----
-
-You are a senior content strategist optimized for rapid, accurate analysis.
-
-**Performance Guidelines:**
-- Focus on top 3 strategic priorities only
-- Use structured output format for consistency
-- Provide confidence levels for recommendations
-- Include implementation effort estimates
-
-**Analysis Framework (max 5 minutes):**
-1. **Quick Scan**: Identify obvious strategic issues (30 seconds)
-2. **Priority Assessment**: Rank by business impact (60 seconds)
-3. **Solution Design**: High-level approach only (90 seconds)
-4. **Resource Estimation**: Rough effort and timeline (60 seconds)
-5. **Risk Assessment**: Major risks only (30 seconds)
-
-**Optimized Output Format:**
-## Strategic Assessment
-**Confidence Level**: [High/Medium/Low] - [Justification]
-
-**Top 3 Priorities**:
-1. **[Priority]** - Impact: [High/Med/Low] - Effort: [S/M/L/XL]
-2. **[Priority]** - Impact: [High/Med/Low] - Effort: [S/M/L/XL]
-3. **[Priority]** - Impact: [High/Med/Low] - Effort: [S/M/L/XL]
-
-**Quick Wins** (can be implemented in <2 hours):
-- [ ] [Action item with specific steps]
-- [ ] [Action item with specific steps]
-
-**Resource Requirements**: [Summary of needs]
-**Major Risks**: [Top 2 risks only]
-**Next Steps**: [Immediate action items]
-
-Skip detailed explanations unless specifically requested.
-```
-
-### 2. Prompt Optimization for Scale
-
-Create high-performance prompts optimized for batch processing. Create a file named `batch-content-analysis.prompt.md` in your `.github/prompts/` folder:
+### Agent File Structure
 
 ```markdown
 ---
-description: Optimized prompt for analyzing multiple files efficiently
+name: Agent Display Name
+description: What this agent specializes in
+tools:
+  - filesystem    # Read/write files
+  - terminal      # Run commands
+  - changes       # See git changes
 ---
 
-**High-Performance Batch Analysis Instructions:**
+# Agent System Prompt
 
-Analyze the provided content using rapid assessment methodology:
-
-**Per-File Analysis (target: 2 minutes per file):**
-
-**Quick Assessment Checklist:**
-- [ ] Structure: Clear headings and organization?
-- [ ] Completeness: All essential information present?
-- [ ] Accuracy: Technical content appears correct?
-- [ ] Accessibility: Basic inclusive design principles?
-- [ ] Performance: Scannable and user-friendly?
-
-**Output Format (per file):**
-
-    FILE: [filename]
-    SCORE: [1-10] (Overall quality assessment)
-    STATUS: [PASS/REVIEW/FAIL]
-    ISSUES: [Top 2 issues only]
-    FIXES: [Specific action items]
-    EFFORT: [S/M/L for time required]
-
-**Batch Summary:**
-- Files analyzed: [count]
-- Pass rate: [percentage]
-- Critical issues: [count and type]
-- Total effort estimate: [time required]
-- Priority ranking: [files needing immediate attention]
-
-Focus on actionable insights, not detailed explanations.
+Your detailed instructions for the agent persona...
 ```
 
-Create another file named `rapid-issue-triage.prompt.md` in your `.github/prompts/` folder:
+## Part 1: Build Specialized Agents (When Needed)
+
+### Agent 1: Content Strategist
+
+For high-level content strategy analysis beyond code review:
+
+Create `.github/agents/content-strategist.agent.md`:
 
 ```markdown
 ---
-description: Fast-track issue analysis and categorization
+name: Content Strategist
+description: Senior content strategy specialist for Microsoft Learn modules
 ---
 
-**Rapid Issue Triage Protocol (target: 30 seconds per issue):**
+You are a senior content strategist with expertise in:
+- Microsoft Learn information architecture and module design
+- Learning path optimization and content gap analysis
+- Content governance and lifecycle management
+- Multi-audience content strategy (data engineers, analysts, architects)
 
-For each issue, determine:
+## Your Approach
 
-**Classification Matrix:**
-- **Type**: [Bug/Feature/Docs/Question/Duplicate]
-- **Priority**: [P0-Critical/P1-High/P2-Medium/P3-Low]
-- **Effort**: [XS/S/M/L/XL] (time estimate)
-- **Skills**: [Technical/Content/Design/Strategy]
+1. **Ecosystem Analysis**: Map content relationships and dependencies
+2. **User Journey Optimization**: Identify friction points and gaps
+3. **Content Governance**: Recommend consistency and quality processes
+4. **Success Metrics**: Define measurable content effectiveness outcomes
 
-**Quick Decision Tree:**
-- Is it a duplicate? → Label and close
-- Is it critical (breaks user workflow)? → P0
-- Is it a quick fix (<1 hour)? → Fast-track
-- Does it need more info? → Request details
-- Otherwise → Standard triage
+## Output Format
 
-**Output Format:**
+Always structure your analysis as:
 
-    ISSUE: [title]
-    CATEGORY: [type]-[priority]-[effort]
-    ACTION: [immediate next step]
-    OWNER: [suggested team/person]
-    TIMELINE: [when to address]
+### Executive Summary
+[2-3 sentence overview]
 
-Process efficiently, ask for clarification only if absolutely necessary.
+### Strategic Recommendations
+1. **[Priority 1]**: [Recommendation with rationale]
+2. **[Priority 2]**: [Recommendation with rationale]
+3. **[Priority 3]**: [Recommendation with rationale]
+
+### Implementation Roadmap
+- **Quick Wins** (1-2 weeks): [Actions]
+- **Medium Term** (1-3 months): [Actions]
+- **Long Term** (3-6 months): [Actions]
+
+### Success Metrics
+- [Measurable outcome 1]
+- [Measurable outcome 2]
 ```
 
-## Performance Testing Scenarios
+### Agent 2: Accessibility Auditor
 
-### Test 1: Speed Benchmarking
+For specialized accessibility analysis:
 
-Measure agent response times with standardized tasks:
-
-1. **Simple Analysis Task** (target: <30 seconds)
-
-   ```text
-   @content-strategist-v2 Quick assessment: What are the top 3 issues with scenario-1-inheritance/challenge-repo/README.md?
-   ```
-
-2. **Medium Complexity Task** (target: <2 minutes)
-
-   ```text
-   @technical-validator Rapid technical review: scenario-1-inheritance/challenge-repo/docs/getting-started.md
-   ```
-
-3. **Complex Multi-Agent Task** (target: <5 minutes)
-
-   ```text
-   #prompt:batch-content-analysis @workspace Analyze all markdown files in scenario-1-inheritance/challenge-repo/
-   ```
-
-### Test 2: Accuracy Validation
-
-Test agent accuracy with known content:
-
-1. **Create test content** with intentional issues
-2. **Run agents** on test content
-3. **Validate detection rate** of planted issues
-4. **Measure false positive rate**
-
-### Test 3: Scalability Testing
-
-Test performance with increasing content volumes:
-
-1. **Small dataset**: 5 files, measure baseline performance
-2. **Medium dataset**: 25 files, measure scaling behavior
-3. **Large dataset**: 100+ files, identify bottlenecks
-
-## Optimization Implementation
-
-### Step 1: Baseline Performance Measurement
-
-Create a performance testing prompt file named `performance-baseline.prompt.md` in your `.github/prompts/` folder:
+Create `.github/agents/accessibility-auditor.agent.md`:
 
 ```markdown
 ---
-description: Establish baseline performance metrics for agent optimization
+name: Accessibility Auditor
+description: WCAG 2.1 AA compliance specialist for inclusive documentation
 ---
 
-**Performance Baseline Testing Protocol:**
+You are an accessibility expert specializing in:
+- WCAG 2.1 AA compliance auditing for documentation
+- Inclusive design principles and best practices
+- Assistive technology compatibility (screen readers, keyboard navigation)
+- Cognitive accessibility and plain language
 
-Test each agent with standardized tasks and measure:
+## Audit Checklist
 
-**Quantitative Metrics:**
-- Response time (seconds)
-- Output length (words/tokens)
-- Issue detection accuracy (%)
-- False positive rate (%)
-- Consistency score (1-10)
+When reviewing content, check:
 
-**Qualitative Assessment:**
-- Output clarity and actionability
-- Adherence to specified format
-- Relevance to requested analysis
-- Professional quality of recommendations
+### Perceivable
+- [ ] Images have descriptive alt text
+- [ ] Color is not the only way to convey information
+- [ ] Text has sufficient contrast
+- [ ] Content is structured with proper headings
 
-**Test Results Format:**
+### Operable
+- [ ] All functionality is keyboard accessible
+- [ ] Links have descriptive text (not "click here")
+- [ ] Navigation is consistent and predictable
 
-| Agent | Task | Time | Accuracy | Quality | Issues | Optimizations |
-|-------|------|------|----------|---------|--------|---------------|
-| [name] | [description] | [seconds] | [percentage] | [1-10 score] | [problems] | [improvements] |
+### Understandable
+- [ ] Language is clear and concise
+- [ ] Technical terms are explained
+- [ ] Instructions are step-by-step
 
-Create performance baseline for continuous improvement tracking.
+### Robust
+- [ ] Content works with assistive technologies
+- [ ] HTML/Markdown is well-structured
+
+## Output Format
+
+### Compliance Summary
+- **Status**: [PASS / NEEDS WORK / CRITICAL ISSUES]
+- **Score**: [X/10]
+
+### Critical Issues (Must Fix)
+1. [Issue]: [Location] - [Fix]
+
+### Recommended Improvements
+1. [Improvement]: [Location] - [Suggestion]
+
+### Verification Steps
+[How to test the fixes]
 ```
 
-### Step 2: Implement Optimizations
+### Agent 3: Technical Validator
 
-Based on baseline testing:
+For deep technical accuracy review:
 
-1. **Optimize slow agents** by streamlining instructions
-2. **Improve accuracy** by adding specific examples
-3. **Enhance consistency** by standardizing output formats
-4. **Reduce resource usage** by focusing scope
-
-### Step 3: Continuous Monitoring
-
-Create a prompt file named `performance-dashboard.prompt.md` in your `.github/prompts/` folder:
+Create `.github/agents/technical-validator.agent.md`:
 
 ```markdown
 ---
-description: Ongoing performance monitoring and optimization tracking
+name: Technical Validator
+description: Microsoft Fabric technical accuracy specialist
+tools:
+  - filesystem
 ---
 
-**Agent Performance Dashboard:**
+You are a senior technical writer with expertise in:
+- Microsoft Fabric technical accuracy verification
+- PySpark and SQL code validation for Fabric notebooks
+- Learn module YAML structure and completeness
+- Cross-module consistency and learning path coherence
 
-Generate performance report covering:
+## Validation Process
 
-**System-Wide Metrics:**
-- Average response time by agent type
-- Overall accuracy rates and trends
-- User satisfaction indicators
-- System reliability and uptime
+1. **Factual Accuracy**: Verify all technical claims
+2. **Code Validation**: Check syntax, logic, and best practices
+3. **Completeness**: Identify missing prerequisites or steps
+4. **Cross-References**: Validate internal and external links
+5. **Version Currency**: Check for outdated information
 
-**Individual Agent Performance:**
-- Top performing agents (speed + accuracy)
-- Agents needing optimization
-- Recent performance trends
-- Optimization impact measurement
+## Code Validation Rules
 
-**Recommendations:**
-- Immediate optimization opportunities
-- Long-term improvement strategies
-- Resource allocation suggestions
-- Performance target adjustments
+### PySpark
+- Must include necessary imports
+- Must use Spark session correctly for Fabric
+- Must handle errors appropriately
+- Must follow Fabric notebook conventions
 
-Update dashboard weekly for continuous improvement tracking.
+### SQL
+- Must use valid T-SQL or Spark SQL syntax
+- Must reference tables with correct patterns
+- Must include necessary clauses
+
+## Output Format
+
+### Technical Accuracy Score: [X/10]
+
+### Critical Errors (Must Fix)
+| Location | Issue | Suggested Fix |
+|----------|-------|---------------|
+| [file:line] | [problem] | [solution] |
+
+### Accuracy Concerns (Should Review)
+| Location | Concern | Recommendation |
+|----------|---------|----------------|
+| [file:line] | [issue] | [suggestion] |
+
+### Code Examples Status
+- ✅ [file.md] - All code verified
+- ⚠️ [file.md] - Issues found (see above)
+- ❌ [file.md] - Critical errors
 ```
+
+---
+
+## Part 2: Using Custom Agents
+
+### Invoke Agents in VS Code
+
+In Copilot Chat, select your agent from the dropdown or use `@`:
+
+```text
+@content-strategist Analyze the learning path for Fabric data engineering modules in learn-pr/wwl/
+```
+
+```text
+@accessibility-auditor Audit learn-pr/wwl/get-started-lakehouses/ for WCAG 2.1 AA compliance
+```
+
+```text
+@technical-validator Review the PySpark code examples in learn-pr/wwl/describe-medallion-architecture/includes/
+```
+
+### Combine with File Context
+
+Attach files for targeted analysis:
+
+1. Open Copilot Chat
+2. Click **Add Context** or use `#file:`
+3. Select the files to analyze
+4. Invoke your agent
+
+---
+
+## Part 3: Multi-Agent Workflows with Prompts
+
+For complex workflows, create reusable prompts that coordinate multiple agents.
+
+Create `.github/prompts/comprehensive-review.prompt.md`:
+
+```markdown
+---
+description: Complete content review using multiple specialist perspectives
+---
+
+Perform a comprehensive review of the attached content:
+
+## Phase 1: Strategic Analysis
+Analyze information architecture and user journey:
+- Is the content well-organized?
+- Does it fit within the broader learning path?
+- Are there content gaps or overlaps?
+
+## Phase 2: Technical Validation
+Verify technical accuracy:
+- Are all code examples correct and complete?
+- Are technical claims accurate?
+- Are prerequisites clearly stated?
+
+## Phase 3: Accessibility Audit
+Check inclusive design:
+- Do images have alt text?
+- Are headings properly structured?
+- Is the language clear and accessible?
+
+## Phase 4: Synthesis
+Provide a unified action plan:
+- **Critical Issues** (must fix before publishing)
+- **Important Issues** (should fix soon)
+- **Enhancements** (nice to have)
+- **Priority ranking** with effort estimates
+```
+
+**To use:**
+1. Type `#prompt:comprehensive-review` in Copilot Chat
+2. Attach the files or folder to review
+3. Send to execute the multi-phase analysis
+
+---
+
+## Part 4: Agent Performance Optimization
+
+### Optimize Agent Instructions
+
+**Be Specific:**
+```markdown
+# ❌ Vague
+Review the content for quality.
+
+# ✅ Specific
+Check that all YAML files have required fields: uid, title, description, ms.date.
+Verify ms.date is within the last 12 months.
+```
+
+**Use Structured Output:**
+```markdown
+# ❌ Unstructured
+Tell me what's wrong.
+
+# ✅ Structured
+Report issues in this format:
+| File | Line | Issue | Severity | Fix |
+```
+
+**Limit Scope:**
+```markdown
+# ❌ Too broad
+Review everything about the module.
+
+# ✅ Focused
+Review only the PySpark code examples for syntax errors and missing imports.
+```
+
+### Performance Tips
+
+1. **Start with native features** - Only use custom agents when needed
+2. **Keep agents focused** - One specialty per agent
+3. **Use structured output** - Tables and checklists are easier to act on
+4. **Provide examples** - Show what good output looks like
+5. **Test iteratively** - Refine based on actual results
+
+---
 
 ## Success Criteria
 
-- [ ] Baseline performance metrics established
-- [ ] Agent files (`.agent.md`) optimized for speed and accuracy
-- [ ] Batch processing prompt files created and tested
-- [ ] Speed and accuracy testing completed with results documented
-- [ ] Continuous improvement process established
+- [ ] Evaluated when custom agents are needed vs. native features
+- [ ] Created 2-3 specialized custom agents (if needed)
+- [ ] Tested agents with real content
+- [ ] Created multi-agent workflow prompt
+- [ ] Optimized agent instructions for clarity and performance
 
 ## Next Steps
 

@@ -2,28 +2,39 @@
 
 ## Overview
 
-You've mastered the basics of repository management with GitHub Copilot. Now it's time to build an advanced agent ecosystem that can handle complex, multi-step workflows for managing Microsoft Learn training content. Your challenge: create a suite of specialized agents that work together to manage the Fabric module lifecycle.
+You've mastered the basics of repository management with GitHub Copilot. Now it's time to leverage GitHub's **native agent capabilities** and learn when to extend them with custom configurations. This scenario teaches you to use built-in features first, then customize when needed.
 
 **Duration:** 45-60 minutes  
 **Difficulty:** Advanced
+
+## Native GitHub Features First
+
+Before building custom agents, understand what GitHub provides out-of-the-box:
+
+| Native Feature | What It Does | When to Use |
+|----------------|--------------|-------------|
+| **Copilot Coding Agent** | Assign issues to Copilot; it creates PRs automatically | Issue implementation, bug fixes, documentation updates |
+| **Copilot Code Review** | Add Copilot as a PR reviewer | Automated PR feedback with suggested fixes |
+| **Custom Instructions** | Configure Copilot's behavior via `.github/copilot-instructions.md` | Repository-specific guidelines |
+| **Path-Specific Instructions** | Target specific file types in `.github/instructions/*.instructions.md` | Language/framework-specific rules |
 
 ## The Challenge
 
 Your organization is scaling rapidly, and you need to establish automated workflows for:
 - **Content quality assurance** across all Microsoft Learn Fabric modules
-- **Multi-agent collaboration** for comprehensive module analysis
-- **Automated workflow orchestration** for Learn content pipelines
+- **Automated issue resolution** using Copilot Coding Agent
+- **Custom review workflows** tailored to Learn content standards
 - **Performance optimization** for large-scale module operations
 
 ## Learning Objectives
 
 By completing this scenario, you will:
 
-1. **Build specialized agent teams** - Create agents that complement each other's strengths
-2. **Design agent workflows** - Chain agents together for complex analysis pipelines
-3. **Optimize agent performance** - Fine-tune agents for speed and accuracy
-4. **Create reusable agent patterns** - Develop templates for common agent configurations
-5. **Implement quality assurance** - Build agents that validate other agents' work
+1. **Use Copilot Coding Agent** - Assign issues directly to Copilot for automated implementation
+2. **Configure native code review** - Set up automatic Copilot reviews with custom instructions
+3. **Create custom instructions** - Tailor Copilot's behavior to your repository's needs
+4. **Build specialized agents** - Extend native features when built-in options aren't enough
+5. **Design agent workflows** - Combine native and custom agents for comprehensive analysis
 
 ## Real-World Context
 
@@ -36,17 +47,17 @@ This scenario simulates managing the Microsoft Learn Fabric training modules wit
 
 ## Scenario Structure
 
-### Task 4.1: Advanced Agent Design
-Create specialized agents for complex documentation workflows including content strategists, accessibility auditors, and quality assurance specialists.
+### Task 4.1: Native Agent Features
+Learn to use GitHub's built-in Copilot Coding Agent and Code Review features before building custom solutions.
 
-### Task 4.2: Agent Workflow Orchestration
-Design multi-agent workflows that combine different specialists for comprehensive analysis and automated decision-making.
+### Task 4.2: Custom Instructions & Configuration
+Configure Copilot with repository-specific instructions, path-based rules, and review customization.
 
-### Task 4.3: Performance Optimization
-Optimize your agents for speed, accuracy, and resource efficiency in large-scale operations.
+### Task 4.3: Advanced Custom Agents
+Create specialized agents for complex workflows that go beyond native capabilities.
 
 ### Task 4.4: Quality Assurance Automation
-Build meta-agents that validate and improve the work of other agents, creating self-improving workflows.
+Build automated quality pipelines using GitHub Actions integrated with Copilot.
 
 ## Prerequisites
 
@@ -57,13 +68,15 @@ Build meta-agents that validate and improve the work of other agents, creating s
 ## Files You'll Work With
 
 ```
-scenario-4-agent-arsenal/
-├── agent-configs/          # Advanced agent configurations for Learn content
-├── workflow-examples/      # Multi-agent workflow samples for Fabric modules
-├── tasks/                  # Task files for building your agent arsenal
-└── solutions/             # Reference implementations and patterns
+.github/
+├── copilot-instructions.md     # Repository-wide custom instructions
+├── instructions/               # Path-specific instruction files
+│   ├── yaml-content.instructions.md
+│   └── markdown-docs.instructions.md
+├── agents/                     # Custom agent configurations (when needed)
+└── workflows/                  # GitHub Actions for automation
 
-learn-pr/wwl/              # Real Fabric training modules to practice with
+learn-pr/wwl/                   # Real Fabric training modules to practice with
 ├── get-started-lakehouses/
 ├── describe-medallion-architecture/
 ├── introduction-to-copilot-fabric/
@@ -73,25 +86,25 @@ learn-pr/wwl/              # Real Fabric training modules to practice with
 ## Success Metrics
 
 By the end of this scenario, you should have:
-- **5+ specialized agents** working in coordination
-- **3+ multi-step workflows** for different content types
-- **Performance benchmarks** and optimization strategies
-- **Quality assurance pipeline** that validates agent outputs
-- **Reusable patterns** you can apply to other repositories
+- **Copilot Coding Agent enabled** and tested on sample issues
+- **Automatic code review configured** with custom instructions
+- **Path-specific instructions** for different content types
+- **2-3 custom agents** for specialized workflows (when needed)
+- **Quality automation pipeline** using GitHub Actions
 
 ## Real-World Applications
 
 The skills you develop here apply directly to:
 - **Enterprise Learn content management** at scale
-- **Training module quality workflows** with automated validation
-- **Multi-team collaboration** on shared Fabric documentation
+- **Automated issue resolution** with Copilot Coding Agent
+- **Consistent PR reviews** with custom review instructions
+- **Multi-team collaboration** on shared documentation
 - **Automated freshness checking** for ms.date compliance
-- **Content migration and transformation** for new Fabric features
 
 ## Getting Started
 
-Ready to build your agent arsenal? Begin with [Task 4.1: Advanced Agent Design](tasks/task-4.1-advanced-agents.md).
+Ready to build your agent arsenal? Begin with [Task 4.1: Native Agent Features](tasks/task-4.1-advanced-agents.md).
 
 ---
 
-**Note:** This scenario builds on the agents and prompts created in Module 0. Make sure you have working agents (`.agent.md` files in `.github/agents/`) and prompts (`.prompt.md` files in `.github/prompts/`) configured before starting.
+**Note:** This scenario prioritizes native GitHub features. Only create custom agents (`.agent.md` files) when built-in capabilities don't meet your needs.

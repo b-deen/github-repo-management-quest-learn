@@ -1,41 +1,334 @@
-# Task 4.2: Agent Workflow Orchestration
+# Task 4.2: Custom Instructions & Configuration
 
 ## Objective
 
-Design multi-agent workflows that combine different specialists for comprehensive analysis and automated decision-making.
+Configure Copilot with repository-specific instructions, path-based rules, and review customization to tailor its behavior without building custom agents.
 
-## Your Challenge
+## Why Custom Instructions?
 
-Create 3 sophisticated workflows that orchestrate your agents in sequence for different content management scenarios.
+Custom instructions are the **recommended way** to customize Copilot behavior:
+- ✅ No code to maintain
+- ✅ Works with native Copilot Code Review
+- ✅ Works with Copilot Coding Agent
+- ✅ Applies automatically to all Copilot interactions
+- ✅ Version controlled with your repository
 
-## Workflow Design Patterns
+## Instruction File Types
 
-### Pattern 1: Sequential Analysis Pipeline
+| File | Location | Purpose |
+|------|----------|---------|
+| `copilot-instructions.md` | `.github/` | Repository-wide instructions |
+| `*.instructions.md` | `.github/instructions/` | Path-specific instructions |
+| `AGENTS.md` | Any directory | Agent context (nearest file wins) |
 
-Agents work in sequence, each building on the previous agent's findings.
+## Part 1: Repository-Wide Instructions
 
-### Pattern 2: Parallel Assessment Matrix
+### Step 1: Create the Main Instructions File
 
-Multiple agents analyze the same content simultaneously, then results are synthesized.
+Create `.github/copilot-instructions.md`:
 
-### Pattern 3: Conditional Branching Workflow
+```markdown
+# Copilot Instructions for Microsoft Learn Content
 
-Workflow adapts based on initial findings, routing to different agents as needed.
+## Project Overview
+This repository contains Microsoft Learn training modules for Microsoft Fabric.
+Modules are located in `learn-pr/wwl/` and follow the Learn authoring format.
 
-## Prompt Writing Conventions
+## Repository Structure
+- `learn-pr/wwl/*/` - Individual training modules
+- `learn-pr/wwl/*/includes/` - Module units (content files)
+- `learn-pr/wwl/*/index.yml` - Module metadata and unit definitions
 
-When writing workflow prompts, you'll see text in brackets like `[APPROVED/NEEDS REVISION]` or `[description of expected content]`. These are **placeholder patterns** that guide Copilot's output:
+## Build and Validation
+Always run these checks before committing:
+1. `yamllint **/*.yml` - Validate YAML syntax
+2. `markdownlint **/*.md` - Check markdown formatting
+3. Verify all internal links resolve correctly
 
-| Pattern | Meaning | Example |
-|---------|---------|---------|
-| `[OPTION1/OPTION2/OPTION3]` | Copilot chooses one value | `[APPROVED/NEEDS REVISION/BLOCKED]` → outputs `APPROVED` |
-| `[Description]` | Copilot fills in that type of content | `[Must-fix items]` → outputs actual issues found |
+## Content Standards
 
-This convention helps ensure structured, consistent outputs from your workflow prompts.
+### YAML Metadata Requirements
+Every `index.yml` must include:
+- `uid`: Unique identifier matching folder name pattern
+- `title`: Module title (sentence case)
+- `description`: 150-300 character description
+- `ms.date`: Last significant update date (MM/DD/YYYY format)
+- `author`: GitHub username of primary author
 
-## Workflow 1: New Content Publication Pipeline
+### Markdown Formatting
+- Use sentence case for headings (not Title Case)
+- Include alt text for all images
+- Specify language in fenced code blocks (```python, ```sql, ```yaml)
+- Use relative links for internal references
 
-Create a file named `content-publication-pipeline.prompt.md` in your `.github/prompts/` folder:
+### Code Examples
+- All PySpark code must be valid for Fabric notebooks
+- Include necessary imports at the start of code blocks
+- Add comments explaining non-obvious logic
+- Test code examples before committing
+
+## Code Review Focus
+When reviewing PRs, prioritize:
+1. YAML structure and required fields
+2. ms.date freshness (should be within 12 months)
+3. Broken internal links
+4. Missing alt text on images
+5. Inconsistent terminology
+
+## Terminology
+Always use:
+- "Microsoft Fabric" (not just "Fabric" on first reference)
+- "lakehouse" (lowercase, one word)
+- "PySpark" (not "pyspark" or "Pyspark")
+- "SQL" (uppercase)
+```
+
+### Step 2: Verify Instructions Are Used
+
+1. Make a change to any file in the repository
+2. Open Copilot Chat and ask a question about the repository
+3. Check the **References** section - you should see `copilot-instructions.md` listed
+
+---
+
+## Part 2: Path-Specific Instructions
+
+Path-specific instructions apply only when Copilot is working on matching files.
+
+### Step 1: Create YAML-Specific Instructions
+
+Create `.github/instructions/yaml-modules.instructions.md`:
+
+```markdown
+---
+applyTo: "**/index.yml,**/*.yml"
+---
+
+# YAML File Instructions
+
+## Required Fields for index.yml
+Every module index.yml must have:
+```yaml
+### YamlMime:Module
+uid: learn.wwl.[module-name]
+title: [Module Title]
+description: [150-300 characters]
+ms.date: [MM/DD/YYYY]
+author: [github-username]
+ms.author: [microsoft-alias]
+ms.topic: module
+```
+
+## Unit References
+When adding units, ensure:
+- Unit files exist in the `includes/` folder
+- Unit UIDs follow pattern: `learn.wwl.[module-name].[unit-name]`
+- Unit order matches intended learning progression
+
+## Common YAML Errors to Avoid
+- Missing quotes around strings with colons
+- Incorrect indentation (use 2 spaces)
+- Trailing whitespace
+- Duplicate keys
+```
+
+### Step 2: Create Markdown-Specific Instructions
+
+Create `.github/instructions/markdown-content.instructions.md`:
+
+```markdown
+---
+applyTo: "**/*.md"
+---
+
+# Markdown Content Instructions
+
+## Heading Structure
+- Use only one H1 (`#`) per file - the title
+- Follow sequential heading levels: H1 → H2 → H3 (no skipping)
+- Use sentence case for headings
+
+## Code Blocks
+Always specify the language:
+```python
+# Python/PySpark code
+```
+```sql
+-- SQL queries
+```
+```yaml
+# YAML configuration
+```
+
+## Links
+- Use relative paths for internal links: `[text](../other-module/file.md)`
+- Use descriptive link text (not "click here")
+- Verify links resolve before committing
+
+## Images
+- Include alt text: `![Descriptive alt text](path/to/image.png)`
+- Store images in module's `media/` folder
+- Use PNG or SVG for diagrams, JPG for photos
+
+## Lists
+- Use `-` for unordered lists
+- Use `1.` for ordered lists (auto-numbered)
+- Indent nested items with 2 spaces
+```
+
+### Step 3: Create PySpark-Specific Instructions
+
+Create `.github/instructions/pyspark-code.instructions.md`:
+
+```markdown
+---
+applyTo: "**/includes/*.md"
+excludeAgent: "code-review"
+---
+
+# PySpark Code Example Instructions
+
+These instructions apply when Copilot Coding Agent works on unit files.
+
+## PySpark Best Practices for Fabric
+When generating PySpark code examples:
+
+```python
+# Always include necessary imports
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, when, lit
+
+# Get the Spark session (Fabric provides this automatically)
+spark = SparkSession.builder.getOrCreate()
+```
+
+## Common Patterns
+
+### Reading from Lakehouse
+```python
+df = spark.read.format("delta").load("Tables/my_table")
+```
+
+### Writing to Lakehouse
+```python
+df.write.format("delta").mode("overwrite").save("Tables/output_table")
+```
+
+## Error Handling
+Always show error handling for production code:
+```python
+try:
+    result = df.collect()
+except Exception as e:
+    print(f"Error: {e}")
+```
+```
+
+---
+
+## Part 3: Agent Context Files (AGENTS.md)
+
+For more complex projects, use `AGENTS.md` files to provide directory-specific context.
+
+### Step 1: Create Root AGENTS.md
+
+Create `AGENTS.md` in the repository root:
+
+```markdown
+# Agent Instructions
+
+This repository contains Microsoft Learn training content for Microsoft Fabric.
+
+## Key Directories
+- `learn-pr/wwl/` - All training modules
+- `.github/` - Configuration and workflows
+- `media/` - Shared images and diagrams
+
+## Working with This Repository
+
+### Before Making Changes
+1. Read the relevant module's README if it exists
+2. Check the `index.yml` for module structure
+3. Verify ms.date is updated when changing content
+
+### After Making Changes
+1. Run linting checks
+2. Verify all links work
+3. Update ms.date if content significantly changed
+```
+
+### Step 2: Create Module-Specific AGENTS.md
+
+Create `learn-pr/wwl/AGENTS.md`:
+
+```markdown
+# Learn Module Instructions
+
+Each subdirectory is a complete Microsoft Learn module.
+
+## Module Structure
+```
+module-name/
+├── index.yml          # Module metadata and unit list
+├── includes/          # Unit content files
+│   ├── 1-introduction.md
+│   ├── 2-main-content.md
+│   └── n-summary.md
+├── media/             # Module images
+└── knowledge-check.yml # Quiz questions (optional)
+```
+
+## Common Tasks
+
+### Adding a New Unit
+1. Create the markdown file in `includes/`
+2. Add the unit reference to `index.yml`
+3. Update the module description if needed
+4. Update `ms.date`
+
+### Updating Existing Content
+1. Make content changes
+2. Update `ms.date` in `index.yml`
+3. Verify cross-references still work
+```
+
+---
+
+## Part 4: Testing Your Configuration
+
+### Test 1: Copilot Code Review with Custom Instructions
+
+1. Create a PR with intentional issues
+2. Add Copilot as a reviewer
+3. Verify Copilot references your custom instructions in its feedback
+
+### Test 2: Copilot Coding Agent with Instructions
+
+1. Create an issue: "Add a new unit about data transformation"
+2. Assign to Copilot
+3. Verify the PR follows your custom instructions
+
+### Test 3: Path-Specific Instructions
+
+1. Ask Copilot Chat about a YAML file
+2. Verify it applies YAML-specific guidance
+3. Ask about a Markdown file
+4. Verify it applies Markdown-specific guidance
+
+---
+
+## Success Criteria
+
+- [ ] Repository-wide instructions created (`.github/copilot-instructions.md`)
+- [ ] Path-specific instructions for YAML files
+- [ ] Path-specific instructions for Markdown files
+- [ ] Instructions verified in Copilot Chat references
+- [ ] Copilot Code Review uses custom instructions
+- [ ] (Optional) AGENTS.md files for directory context
+
+## Next Steps
+
+Ready to build custom agents for specialized workflows? Continue to [Task 4.3: Advanced Custom Agents](task-4.3-performance-optimization.md)
 
 ```markdown
 ---

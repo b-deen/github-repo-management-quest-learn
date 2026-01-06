@@ -49,13 +49,37 @@ Before starting this scenario, ensure the sample PR has been created by running 
 
 > **Note:** Look for the PR titled `[Quest Sample] Add advanced Copilot data agent content` in your repository's Pull Requests tab.
 
+## Native GitHub Copilot Features for PR Review
+
+GitHub now provides **native Copilot code review** capabilities that should be your first choice:
+
+### Copilot as a PR Reviewer (Recommended)
+1. Open the PR on GitHub.com
+2. In the **Reviewers** dropdown, select **Copilot**
+3. Copilot automatically analyzes the PR and leaves review comments with suggested fixes
+4. Apply suggestions with one click, or dismiss them
+
+### Automatic Copilot Reviews
+Repository admins can configure automatic Copilot reviews for all PRs:
+- Go to **Settings > Copilot > Code review**
+- Enable automatic reviews for specific file patterns
+
+### Custom Review Instructions
+Add custom instructions for Copilot code review in `.github/copilot-instructions.md`:
+```markdown
+When performing a code review, apply the checks in the Microsoft Learn style guide.
+When performing a code review, focus on YAML structure and cross-references.
+```
+
+> **Best Practice:** Use native Copilot code review first, then supplement with @workspace analysis in VS Code for deeper investigation.
+
 ## Your Tasks
 
 ### Task 3.1: High-Level PR Review (15 minutes)
 
 **File:** [tasks/task-3.1-initial-review.md](tasks/task-3.1-initial-review.md)
 
-Perform an initial high-level review of the PR to understand the scope, changes, and potential issues.
+Use **GitHub Copilot's native PR review** as your starting point, then perform deeper analysis with @workspace.
 
 **Key Questions:**
 
@@ -98,6 +122,19 @@ Write a comprehensive PR review with:
 - Constructive suggestions for improvement
 - Positive feedback on what's done well
 - Clear next steps for the contributor
+
+---
+
+## Feature Priority Guide
+
+When reviewing PRs, use features in this order:
+
+| Priority | Feature | When to Use |
+|----------|---------|-------------|
+| 1️⃣ | **Native Copilot PR Review** | First step - add Copilot as reviewer |
+| 2️⃣ | **Custom Instructions** | Configure in `.github/copilot-instructions.md` |
+| 3️⃣ | **@workspace in VS Code** | Deep dive into specific concerns |
+| 4️⃣ | **Copilot Coding Agent** | Ask Copilot to fix issues it finds |
 
 ## How to Approach This Scenario
 

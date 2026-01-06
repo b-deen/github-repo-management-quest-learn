@@ -1,21 +1,21 @@
-# Task 2.1: Initial PR Review with GitHub Copilot
+# Task 3.1: Initial PR Review with GitHub Copilot
 
 **Duration:** 15 minutes
 **Difficulty:** Intermediate
-**GitHub Copilot Features:** @workspace, GitHub.com PR summary, Copilot Chat
+**GitHub Copilot Features:** Native Copilot Code Review, @workspace, Copilot Chat
 
 ## Objective
 
-Perform an initial high-level review of Pull Request #127 using GitHub Copilot's PR summary features and @workspace analysis to understand the scope, goals, and overall quality before diving into detailed review.
+Perform an initial high-level review of Pull Request #127 using GitHub Copilot's **native code review feature** as your first step, then supplement with @workspace analysis for deeper investigation.
 
 ## Context
 
-When reviewing a large PR (+847/-312 lines across 18 files), you can't read every line carefully. GitHub Copilot provides powerful features to help you understand PRs quickly:
-- **GitHub.com PR Summary**: Native AI-powered PR summaries directly in the GitHub interface
-- **@workspace Analysis**: VS Code integration to analyze PR changes in full repository context
-- **Change Impact Analysis**: Understanding how PR changes affect the broader codebase
+When reviewing a large PR (+847/-312 lines across 18 files), you can't read every line carefully. GitHub now provides **native Copilot code review** that should be your starting point:
 
-This task shows you how to use GitHub Copilot to work smarter, understanding the big picture before focusing on high-risk areas.
+- **Native Copilot PR Review**: Add Copilot as a reviewer directly on GitHub.com - it provides inline feedback with suggested fixes
+- **Automatic Reviews**: Configure Copilot to automatically review all PRs
+- **Custom Instructions**: Tailor Copilot's review focus with `.github/copilot-instructions.md`
+- **@workspace Analysis**: Use VS Code for deeper investigation of specific concerns
 
 ## Setup
 
@@ -30,11 +30,13 @@ This task shows you how to use GitHub Copilot to work smarter, understanding the
 
 ### For This Task You'll Use:
 
-1. **The Sample PR on GitHub:**
-   - Look for PR titled `[Quest Sample] Add advanced Copilot data agent content`
-   - Use GitHub's Files Changed tab to review the changes
+1. **Native Copilot PR Review (Primary Method):**
+   - Open the PR on GitHub.com
+   - Click the **Reviewers** dropdown
+   - Select **Copilot** to request a code review
+   - Wait ~30 seconds for Copilot to analyze the PR
 
-2. **VS Code with Copilot Chat:**
+2. **VS Code with Copilot Chat (Secondary Method):**
    - Open your repository in VS Code
    - Press `Ctrl+Shift+I` (Windows/Linux) or `Cmd+Shift+I` (Mac)
 
@@ -45,11 +47,60 @@ This task shows you how to use GitHub Copilot to work smarter, understanding the
 
 **Context:** This PR adds advanced Copilot content to the `implement-fabric-data-agents` Learn module, including new tutorials on advanced scenarios, best practices, and troubleshooting.
 
-**Note:** In a real scenario, you would review the PR directly on GitHub.com using GitHub's native PR summary feature. For this quest, you can also use @workspace in VS Code to analyze the repository context.
-
 ## Tasks
 
-### 1. Generate PR Overview with @workspace
+### 1. Use Native Copilot PR Review (Recommended First Step)
+
+**On GitHub.com:**
+
+1. Navigate to your PR titled `[Quest Sample] Add advanced Copilot data agent content`
+2. Click the **Reviewers** gear icon in the right sidebar
+3. Select **Copilot** from the dropdown
+4. Wait approximately 30 seconds for Copilot to analyze the PR
+5. Scroll through the PR to see Copilot's inline review comments
+
+**What Native Copilot Review Provides:**
+- Inline comments on potential issues in the code/content
+- Suggested fixes you can apply with one click
+- Feedback organized by file
+- Comments behave like human review comments (you can react, reply, resolve)
+
+**Key Benefits:**
+- ✅ No prompts to write - Copilot analyzes automatically
+- ✅ Suggested changes can be applied directly
+- ✅ Works on any PR without VS Code setup
+- ✅ Review comments are visible to all collaborators
+
+> **Note:** Copilot always leaves a "Comment" review, not "Approve" or "Request Changes", so it won't block merging.
+
+**Deliverable:** Note which files Copilot flagged and what types of issues it found
+
+---
+
+### 2. (Optional) Configure Custom Review Instructions
+
+If you want Copilot to focus on specific aspects, add custom instructions:
+
+**Create `.github/copilot-instructions.md`:**
+
+```markdown
+When performing a code review, apply the following checks:
+
+- Verify YAML frontmatter follows Microsoft Learn schema (title, description, ms.date, author)
+- Check that ms.date values are within the last 12 months
+- Ensure all internal links use relative paths
+- Verify code blocks specify language (python, sql, yaml)
+- Check for consistent terminology (Microsoft Fabric, not just Fabric)
+- Flag any placeholder text like TODO, TBD, or [INSERT]
+```
+
+Once saved, Copilot will use these instructions for all code reviews in the repository.
+
+---
+
+### 3. Generate Deep Analysis with @workspace
+
+**After reviewing Copilot's native feedback**, use @workspace in VS Code for deeper investigation:
 
 **GitHub Copilot Chat Prompt:**
 

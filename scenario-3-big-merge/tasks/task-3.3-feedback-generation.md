@@ -1,8 +1,8 @@
-# Task 2.3: Generating Constructive Feedback with GitHub Copilot
+# Task 3.3: Generating Constructive Feedback with GitHub Copilot
 
 **Duration:** 15 minutes
 **Difficulty:** Intermediate
-**GitHub Copilot Features:** @workspace, Copilot Chat, inline suggestions
+**GitHub Copilot Features:** Native Copilot Code Review, @workspace, Copilot Chat, inline suggestions
 
 ## Objective
 
@@ -10,30 +10,67 @@ Transform your review findings into professional, constructive, and actionable f
 
 ## Context
 
-You've completed a detailed review and found issues. Now comes the critical part: communicating your findings effectively. Poor feedback can:
+You've completed a detailed review using **native Copilot code review** and @workspace analysis. Now comes the critical part: communicating your findings effectively. Poor feedback can:
 - Demoralize contributors
 - Lead to misunderstandings
 - Create unnecessary back-and-forth
 - Damage team relationships
 
-GitHub Copilot can help you:
-- Draft diplomatic, constructive review comments
-- Suggest specific improvements (not just point out problems)
-- Explain the "why" behind requested changes
-- Provide code/content examples showing the fix
-- Maintain a positive, collaborative tone
+**Native Copilot helps with feedback:**
+- One-click suggestions apply changes automatically
+- Authors can accept or dismiss inline comments
+- Suggestion history is tracked in the PR
+
+**You supplement with:**
+- Summary comments explaining the overall review
+- Context for why changes matter
+- Encouragement and acknowledgment of good work
+
+## Feedback Strategy
+
+| Feedback Type | Tool | When to Use |
+|---------------|------|-------------|
+| Code/content fixes | Native Copilot suggestions | Clear issues with specific fixes |
+| Technical explanations | GitHub PR comments | When context is needed |
+| Style feedback | @workspace-drafted comments | For consistency issues |
+| Summary & next steps | Manual PR summary comment | Every review |
 
 ## Setup
 
-1. **Have your pr-review.md open** with all findings from Tasks 2.1 and 2.2
+1. **Have your pr-review.md open** with all findings from Tasks 3.1 and 3.2
 
-2. **Open Copilot Chat:** `Ctrl+Shift+I` (Cmd+Shift+I on Mac)
+2. **Review Copilot's inline suggestions** on GitHub.com from your earlier reviews
 
-3. **Create new file:** `pr-feedback.md` for your feedback comments
+3. **Open Copilot Chat:** `Ctrl+Shift+I` (Cmd+Shift+I on Mac)
+
+4. **Create new file:** `pr-feedback.md` for your feedback comments
 
 ## Tasks
 
-### 1. Generate Summary Feedback
+### 1. Review and Supplement Copilot's Native Suggestions
+
+**On GitHub.com:**
+
+Before writing additional feedback, check what Copilot has already provided:
+
+1. Navigate to the PR's **Files changed** tab
+2. Review all Copilot inline comments
+3. For each comment:
+   - If clear and sufficient → Let it stand (author can apply directly)
+   - If needs more context → Add a reply explaining why
+   - If missing something → Add your own inline comment
+
+**When to Add Your Own Context:**
+
+Native Copilot suggestions are great for "what to fix" but sometimes miss "why it matters." Add your own comment when:
+- The fix relates to project-specific standards
+- The issue affects users in non-obvious ways
+- The author might not understand the severity
+- You want to link to documentation or examples
+
+---
+
+### 2. Generate Summary Feedback
 
 **GitHub Copilot Chat Prompt:**
 
@@ -45,10 +82,11 @@ GitHub Copilot can help you:
 Write a PR summary comment that:
 1. Thanks the author for their contribution
 2. Acknowledges the positive aspects (specific examples)
-3. Summarizes the main issues by category
-4. States the overall recommendation (approve/request changes)
-5. Sets clear expectations for what needs to be addressed
-6. Maintains an encouraging, collaborative tone
+3. Notes that Copilot has provided inline suggestions they can apply
+4. Summarizes additional issues by category
+5. States the overall recommendation (approve/request changes)
+6. Sets clear expectations for what needs to be addressed
+7. Maintains an encouraging, collaborative tone
 
 Format this as a GitHub PR comment I can post.
 ```
@@ -65,10 +103,12 @@ Format this as a GitHub PR comment I can post.
 
 Thanks for this comprehensive PR, @author! The new tutorials are excellent additions and the content quality is generally very high. I particularly appreciate the detailed code examples and clear explanations.
 
-However, I've identified some issues that need to be addressed before we can merge:
+**Quick Wins:** Copilot has left several inline suggestions in the Files Changed tab - you can apply most of these with one click! 🎉
+
+**Additional Items to Address:**
 
 **Critical Issues (Must Fix):**
-- API documentation has technical inaccuracies (3 blockers)
+- API documentation has technical inaccuracies (see inline comments)
 - Broken links from deleted file (4 locations)
 
 **Important Issues (Should Fix):**
@@ -84,7 +124,7 @@ I've provided detailed feedback below for each issue with suggested fixes. Most 
 
 ---
 
-### 2. Draft Feedback for Technical Issues
+### 3. Draft Feedback for Technical Issues
 
 **GitHub Copilot Chat Prompt:**
 
@@ -681,7 +721,7 @@ You've completed this task when your feedback:
 
 ## What's Next?
 
-After generating your feedback, move to **Task 2.4** where you'll use GitHub Copilot to perform final validation checks and submit your comprehensive PR review.
+After generating your feedback, move to **Task 3.4** where you'll use GitHub Copilot to perform final validation checks and submit your comprehensive PR review.
 
 ---
 

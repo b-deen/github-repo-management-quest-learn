@@ -1,18 +1,190 @@
-# Task 4.1: Advanced Agent Design
+# Task 4.1: Native Agent Features
 
 ## Objective
 
-Create a suite of specialized agents that can handle complex, enterprise-level Microsoft Learn content workflows.
+Learn to use GitHub's **built-in Copilot agent capabilities** before building custom solutions. Native features are more reliable, require less maintenance, and integrate seamlessly with GitHub workflows.
 
-## Your Challenge
+## Native Features First Approach
 
-Design and implement 5 advanced agents that work together as a coordinated team to manage Learn module quality, from content strategy to technical validation.
+| Feature | Description | Priority |
+|---------|-------------|----------|
+| **Copilot Coding Agent** | Assign issues to Copilot; it creates PRs | 1️⃣ Use First |
+| **Copilot Code Review** | Add Copilot as a PR reviewer | 1️⃣ Use First |
+| **Custom Instructions** | Configure via `.github/copilot-instructions.md` | 2️⃣ Configure |
+| **Path-Specific Instructions** | Target file types in `.github/instructions/` | 2️⃣ Configure |
+| **Custom Agents** | Build custom `.agent.md` files | 3️⃣ Only When Needed |
 
-## Advanced Agent Specifications
+## Part 1: Using Copilot Coding Agent
 
-### 1. Content Strategist Agent
+### What is Copilot Coding Agent?
 
-Create a file named `content-strategist.agent.md` in your `.github/agents/` folder:
+Copilot Coding Agent can work independently to complete tasks, just like a human developer:
+- Fix bugs
+- Implement incremental new features
+- Improve test coverage
+- Update documentation
+- Address technical debt
+
+### Step 1: Assign an Issue to Copilot
+
+1. **Create or find an issue** in your repository
+2. Click the **Assignees** dropdown
+3. Select **Copilot** as the assignee
+4. Copilot will:
+   - Analyze the issue description
+   - Create a new branch (`copilot/...`)
+   - Make the required changes
+   - Open a PR and request your review
+
+**Example issue to try:**
+```markdown
+Title: Add ms.date freshness check documentation
+
+Body:
+Add a section to the README explaining how to check ms.date values in Learn modules.
+Include a list of commands or scripts that can be used to find outdated content.
+```
+
+### Step 2: Review Copilot's PR
+
+When Copilot finishes, it requests your review:
+- Review the changes like you would for any contributor
+- Leave comments with `@copilot` to ask for modifications
+- Copilot will iterate based on your feedback
+- Approve and merge when satisfied
+
+### Step 3: Alternative Ways to Invoke Copilot Coding Agent
+
+**From VS Code:**
+```
+Ask Copilot to create a PR that [describes the task]
+```
+
+**From Copilot Chat on GitHub.com:**
+1. Go to github.com/copilot
+2. Select your repository
+3. Describe the task you want completed
+
+**From an existing PR:**
+- Comment `@copilot` with instructions
+- Copilot will make changes to the existing PR
+
+---
+
+## Part 2: Using Native Copilot Code Review
+
+### Step 1: Request a Review from Copilot
+
+1. Open any PR in your repository
+2. Click the **Reviewers** gear icon
+3. Select **Copilot**
+4. Wait ~30 seconds for analysis
+
+### Step 2: Review Copilot's Feedback
+
+Copilot provides:
+- Inline comments on potential issues
+- Suggested fixes you can apply with one click
+- Explanations of why changes are recommended
+
+**Key behaviors:**
+- Copilot leaves "Comment" reviews (not Approve/Request Changes)
+- Comments behave like human comments (react, reply, resolve)
+- Re-request review after making changes
+
+### Step 3: Configure Automatic Reviews
+
+For automatic Copilot reviews on all PRs:
+1. Go to **Settings > Copilot > Code review**
+2. Enable automatic reviews
+3. Configure which file patterns trigger reviews
+
+---
+
+## Part 3: Custom Instructions (The Right Way)
+
+Instead of building custom agents, configure Copilot's behavior with instructions files.
+
+### Repository-Wide Instructions
+
+Create `.github/copilot-instructions.md`:
+
+```markdown
+# Repository Instructions for Copilot
+
+## Project Overview
+This repository contains Microsoft Learn training modules for Microsoft Fabric.
+
+## Build and Test
+- Validate YAML with `yamllint` before committing
+- Check markdown with `markdownlint`
+- Verify links with the link-checker workflow
+
+## Code Review Guidelines
+When performing code reviews:
+- Verify YAML frontmatter follows Microsoft Learn schema
+- Check ms.date values are within the last 12 months
+- Ensure internal links use relative paths
+- Verify code blocks specify language (python, sql, yaml)
+- Check for consistent terminology (Microsoft Fabric, not Fabric)
+
+## Content Standards
+- Use sentence case for headings
+- Include alt text for all images
+- Wrap code examples in proper fenced blocks
+- Follow accessibility guidelines (WCAG 2.1 AA)
+```
+
+### Path-Specific Instructions
+
+Create `.github/instructions/yaml-content.instructions.md`:
+
+```markdown
+---
+applyTo: "**/*.yml,**/*.yaml"
+---
+
+When working with YAML files in this repository:
+- Validate required fields: title, description, ms.date, author
+- Ensure ms.date format is MM/DD/YYYY
+- Check that unit references match existing file names
+- Verify module UIDs follow the naming convention
+```
+
+Create `.github/instructions/markdown-docs.instructions.md`:
+
+```markdown
+---
+applyTo: "**/*.md"
+---
+
+When working with Markdown documentation:
+- Use heading levels sequentially (H1 → H2 → H3)
+- Include alt text for images: `![descriptive alt text](path)`
+- Use fenced code blocks with language specifiers
+- Check for broken internal links
+- Ensure consistent terminology per the style guide
+```
+
+---
+
+## Part 4: When to Build Custom Agents
+
+Only create custom `.agent.md` files when native features don't meet your needs:
+
+**Good reasons for custom agents:**
+- You need a specialized persona with deep domain expertise
+- You want reusable agent configurations across multiple repos
+- You need agents that chain together in VS Code workflows
+
+**When NOT to build custom agents:**
+- For PR reviews → Use native Copilot code review
+- For issue implementation → Use Copilot Coding Agent
+- For style guidelines → Use custom instructions files
+
+### Example: When a Custom Agent IS Appropriate
+
+If you need a specialized "Microsoft Learn Content Strategist" that provides strategic analysis beyond what code review offers:
 
 ```markdown
 ---
@@ -237,12 +409,32 @@ Present consolidated results with prioritized recommendations.
 
 ## Success Criteria
 
-- [ ] All 5 advanced agents implemented and tested
-- [ ] Each agent demonstrates clear specialization
-- [ ] Agents provide complementary insights on same content
-- [ ] Multi-agent coordination prompt created
-- [ ] Agent responses meet professional quality standards
+- [ ] Copilot Coding Agent enabled and tested on a sample issue
+- [ ] Native Copilot code review used on a PR
+- [ ] Repository-wide custom instructions created (`.github/copilot-instructions.md`)
+- [ ] Path-specific instructions created for YAML and Markdown files
+- [ ] (Optional) 1-2 custom agents created for specialized needs
+
+## Feature Decision Tree
+
+```
+Do I need automated code/content changes?
+├── YES → Use Copilot Coding Agent (assign issue to Copilot)
+└── NO
+    │
+    Do I need PR feedback?
+    ├── YES → Use native Copilot Code Review (add Copilot as reviewer)
+    └── NO
+        │
+        Do I need to configure Copilot's behavior?
+        ├── YES → Use Custom Instructions (.github/copilot-instructions.md)
+        └── NO
+            │
+            Do I need specialized analysis beyond code review?
+            ├── YES → Create a Custom Agent (.github/agents/*.agent.md)
+            └── NO → Use standard Copilot Chat
+```
 
 ## Next Steps
 
-Ready to orchestrate agent workflows? Continue to [Task 4.2: Agent Workflow Orchestration](task-4.2-workflow-orchestration.md)
+Ready to configure custom instructions in depth? Continue to [Task 4.2: Custom Instructions & Configuration](task-4.2-workflow-orchestration.md)

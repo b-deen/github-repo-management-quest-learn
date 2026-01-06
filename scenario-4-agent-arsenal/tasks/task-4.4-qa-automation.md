@@ -2,17 +2,22 @@
 
 ## Objective
 
-Build practical quality assurance workflows that validate content using GitHub Actions and Copilot agents.
+Build practical quality assurance workflows using **GitHub Actions** combined with **native Copilot features** for comprehensive content validation.
 
-## Your Challenge
+## Automation Strategy
 
-Create automated quality checks that run on pull requests and integrate with your agent workflow for content review.
+| Layer | Tool | Purpose |
+|-------|------|---------|
+| **Automated Checks** | GitHub Actions | Linting, link checking, spell check |
+| **AI Review** | Native Copilot Code Review | Content quality feedback |
+| **AI Implementation** | Copilot Coding Agent | Automated fixes |
+| **Custom Analysis** | Custom Agents (optional) | Specialized workflows |
 
 ## Part 1: Automated Linting with GitHub Actions
 
-### Step 1: Create a Markdown Linting Workflow
+### Step 1: Create a Content Quality Workflow
 
-GitHub Actions can automatically check content quality on every pull request. Create a workflow file at `.github/workflows/content-qa.yml`:
+Create `.github/workflows/content-qa.yml`:
 
 ```yaml
 name: Content Quality Checks
@@ -21,7 +26,8 @@ on:
   pull_request:
     paths:
       - '**.md'
-      - 'docs/**'
+      - '**.yml'
+      - '**.yaml'
 
 jobs:
   markdown-lint:
@@ -35,6 +41,19 @@ jobs:
         uses: DavidAnson/markdownlint-cli2-action@v19
         with:
           globs: '**/*.md'
+
+  yaml-lint:
+    name: YAML Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate YAML
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: '**/*.yml'
+          strict: false
 
   link-check:
     name: Link Validation
@@ -64,7 +83,7 @@ jobs:
 
 ### Step 2: Configure Markdownlint Rules
 
-Create a `.markdownlint.json` file in your repository root to define your quality standards:
+Create `.markdownlint.json`:
 
 ```json
 {
@@ -108,56 +127,117 @@ Create `.cspell.json` for spell-check configuration:
 }
 ```
 
-## Part 2: PR Review Agent
+## Part 2: Native Copilot Code Review Integration
 
-### Step 1: Create a Content Review Agent
+### Step 1: Enable Automatic Copilot Reviews
 
-Create a file named `pr-content-reviewer.agent.md` in your `.github/agents/` folder:
+Configure Copilot to automatically review all PRs:
+
+1. Go to **Settings > Copilot > Code review** in your repository
+2. Enable **Automatic reviews**
+3. Configure file patterns if needed (e.g., only `**/*.md` files)
+
+### Step 2: Customize Review Behavior with Instructions
+
+Native Copilot code review uses your custom instructions automatically!
+
+Ensure `.github/copilot-instructions.md` includes review guidance:
+
+```markdown
+## Code Review Guidelines
+
+When performing code reviews on this repository:
+
+### YAML Validation
+- Verify required fields: uid, title, description, ms.date, author
+- Check ms.date is within the last 12 months
+- Validate unit references match actual files
+
+### Markdown Quality
+- Ensure proper heading hierarchy (H1 → H2 → H3)
+- Verify all images have alt text
+- Check code blocks specify language
+- Validate internal links resolve correctly
+
+### Content Standards
+- Use "Microsoft Fabric" on first reference
+- Use sentence case for headings
+- Include prerequisites for hands-on content
+
+### Priority Issues to Flag
+1. Broken internal links (CRITICAL)
+2. Missing or outdated ms.date (HIGH)
+3. Code examples without language specifier (MEDIUM)
+4. Missing image alt text (MEDIUM)
+```
+
+### Step 3: Use Copilot Coding Agent to Fix Issues
+
+When Copilot code review finds issues, you can ask Copilot Coding Agent to fix them:
+
+1. Review Copilot's feedback on the PR
+2. Click "Implement suggestion" on any comment
+3. Or comment `@copilot Please fix the issues identified in this review`
+4. Copilot will create commits addressing the feedback
+
+---
+
+## Part 3: Custom PR Review Agent (Optional)
+
+Only create a custom agent if native Copilot code review doesn't meet your needs.
+
+**When you might need a custom PR review agent:**
+- You want a specific output format not provided by native review
+- You need to coordinate with other custom agents
+- You want interactive VS Code-based review
+
+Create `.github/agents/pr-content-reviewer.agent.md`:
 
 ```markdown
 ---
 name: PR Content Reviewer
-description: Reviews pull request changes for content quality and consistency
+description: Specialized PR reviewer for Microsoft Learn content
 tools:
   - changes
 ---
 
-You are a content quality reviewer for pull requests.
+You are a content quality reviewer for Microsoft Learn pull requests.
 
-**When reviewing PR changes, assess:**
+## Review Checklist
 
-1. **Content Quality**
-   - Clear and concise writing
-   - Proper heading hierarchy
-   - Consistent formatting
+### YAML Validation
+- [ ] All required fields present (uid, title, description, ms.date)
+- [ ] ms.date is current (within 12 months)
+- [ ] Unit references match actual files
 
-2. **Technical Accuracy**
-   - Code examples are correct
-   - File paths are valid
-   - Instructions are complete
+### Markdown Quality  
+- [ ] Heading hierarchy is correct
+- [ ] Images have descriptive alt text
+- [ ] Code blocks have language specifiers
+- [ ] Internal links are valid
 
-3. **Style Consistency**
-   - Matches existing documentation tone
-   - Follows naming conventions
-   - Uses consistent terminology
+### Content Standards
+- [ ] Terminology is consistent
+- [ ] Prerequisites are stated
+- [ ] Code examples are complete
 
-**Review Output Format:**
+## Output Format
 
-## PR Review Summary
-
-**Overall Assessment:** [APPROVE / REQUEST CHANGES / COMMENT]
-
-### What's Good
-- [Positive observation]
-
-### Suggested Improvements
-- [ ] [Specific, actionable suggestion]
+### Summary
+**Recommendation:** [APPROVE / REQUEST CHANGES]
+**Quality Score:** [X/10]
 
 ### Issues Found
-- **[File]**: [Issue description]
+| File | Issue | Severity | Suggested Fix |
+|------|-------|----------|---------------|
 
-Keep feedback constructive and specific.
+### Positive Observations
+- [What's done well]
 ```
+
+**To use:** In VS Code Copilot Chat, select `@pr-content-reviewer` and attach the PR files.
+
+---
 
 ### Step 2: Use the Agent for PR Reviews
 
@@ -330,11 +410,17 @@ Complete these steps to set up your QA automation:
 - [ ] Add `.cspell.json` with custom words
 - [ ] Verify workflow runs on a test PR
 
-### Agent and Prompt Setup
+### Native Copilot Integration
 
-- [ ] Create `pr-content-reviewer.agent.md`
-- [ ] Create `quick-quality-check.prompt.md`
-- [ ] Test agent on a real PR
+- [ ] Enable automatic Copilot code reviews in repository settings
+- [ ] Update `.github/copilot-instructions.md` with review guidelines
+- [ ] Test native Copilot review on a PR
+
+### Optional Custom Agent Setup
+
+- [ ] Create `pr-content-reviewer.agent.md` (only if native review insufficient)
+- [ ] Create `quick-quality-check.prompt.md` for VS Code workflow
+- [ ] Test custom agent alongside native review
 
 ### Templates Setup
 
@@ -344,30 +430,34 @@ Complete these steps to set up your QA automation:
 
 ### Verification
 
-- [ ] Submit a test PR with a markdown error
-- [ ] Confirm the workflow catches the error
-- [ ] Use the PR reviewer agent and verify output
-- [ ] Update quality tracker with current metrics
+- [ ] Submit a test PR with intentional issues
+- [ ] Confirm GitHub Actions catches linting errors
+- [ ] Verify native Copilot review provides feedback
+- [ ] Test Copilot Coding Agent fixing identified issues
 
 ## Success Criteria
 
-- [ ] GitHub Actions workflow runs on every PR with markdown changes
-- [ ] Linting catches formatting issues automatically
-- [ ] Link checker prevents broken links from merging
-- [ ] PR template reminds authors to check quality
+- [ ] GitHub Actions workflow runs on every PR
+- [ ] Native Copilot code review enabled and tested
+- [ ] Custom instructions enhance review quality
+- [ ] Copilot Coding Agent can fix review feedback
 - [ ] Quality metrics are tracked and visible
 
 ## Congratulations
 
-You've built a practical QA automation system that:
+You've built a comprehensive QA automation system that leverages **native GitHub features first**:
 
-- **Automatically checks** markdown quality on every PR
-- **Validates links** before they can break
-- **Catches spelling errors** before they reach production
-- **Provides structured PR reviews** with your agent
-- **Tracks quality metrics** over time
+| Layer | Tool | Status |
+|-------|------|--------|
+| **Automated Checks** | GitHub Actions (lint, links, spelling) | ✅ Runs on every PR |
+| **AI Review** | Native Copilot Code Review | ✅ Automatic feedback |
+| **AI Fixes** | Copilot Coding Agent | ✅ Implements suggestions |
+| **Custom Analysis** | Custom Agents (when needed) | ✅ Specialized workflows |
 
-This is real automation that runs without manual intervention and catches issues before they reach your main branch.
+This approach:
+- **Prioritizes built-in features** that require less maintenance
+- **Uses custom solutions** only when native features aren't sufficient
+- **Automates the entire quality pipeline** from lint to AI review to fix
 
 ## Next Steps
 

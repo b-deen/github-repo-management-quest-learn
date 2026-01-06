@@ -1,37 +1,44 @@
-# Task 2.2: Detailed Content Review with GitHub Copilot
+# Task 3.2: Detailed Content Review with GitHub Copilot
 
 **Duration:** 25 minutes
 **Difficulty:** Intermediate
-**GitHub Copilot Features:** @workspace, inline suggestions, style consistency checking
+**GitHub Copilot Features:** Native Copilot Code Review, @workspace, inline suggestions
 
 ## Objective
 
-Conduct a detailed review of high-priority files from PR #127 using GitHub Copilot's inline suggestions, style checking, and content analysis capabilities to find issues that need feedback.
+Conduct a detailed review of high-priority files from the PR using **native Copilot code review feedback** as your starting point, then supplement with @workspace for deeper investigation.
 
 ## Context
 
-In Task 2.1, you identified which files need detailed review. Now it's time to dig deep into the actual content using GitHub Copilot to:
+In Task 3.1, you used **native Copilot code review** for initial feedback. Now it's time to:
+- Investigate issues Copilot flagged in more depth
 - Check technical accuracy of documentation and code examples
 - Validate style consistency across files
-- Find formatting issues
+- Find issues that automated review may have missed
 - Verify cross-references and links
-- Identify content that could be clearer or more accurate
 
-GitHub Copilot can dramatically speed up this process by comparing styles, checking code examples, and identifying inconsistencies you might miss manually.
+## Recommended Approach
+
+| Step | Tool | Purpose |
+|------|------|---------|
+| 1️⃣ | Native Copilot Review | Review the inline comments Copilot left |
+| 2️⃣ | Apply Suggestions | Use one-click fixes for clear issues |
+| 3️⃣ | @workspace | Deep dive into complex issues |
+| 4️⃣ | Copilot Coding Agent | Ask Copilot to fix remaining issues |
 
 ## Setup
 
 ### Prerequisites
 
-**Before starting this task:** Ensure you have run the "Setup Quest PR" workflow to create the sample PR in your repository, and completed Task 2.1.
+**Before starting this task:** Ensure you have completed Task 3.1 and have Copilot's review feedback available.
 
 1. **Open the Sample PR on GitHub:**
    - Look for PR titled `[Quest Sample] Add advanced Copilot data agent content`
-   - Use the Files Changed tab to see all modifications
+   - Review Copilot's inline comments from Task 3.1
 
-2. **Have your pr-review.md open** from Task 2.1 to reference your review strategy
+2. **Have your pr-review.md open** from Task 3.1 to reference your review strategy
 
-3. **Open Copilot Chat:** `Ctrl+Shift+I` (Cmd+Shift+I on Mac)
+3. **Open VS Code with Copilot Chat:** `Ctrl+Shift+I` (Cmd+Shift+I on Mac)
 
 4. **PR Content (added by the workflow):**
    - New files: `copilot-advanced-scenarios.md`, `copilot-best-practices.md`, `copilot-troubleshooting.md`
@@ -40,14 +47,30 @@ GitHub Copilot can dramatically speed up this process by comparing styles, check
 
 ## Tasks
 
-### 1. Review High-Priority File: Data Agents Documentation
+### 1. Review and Apply Copilot's Suggestions
+
+**On GitHub.com:**
+
+1. Navigate to the PR's **Files changed** tab
+2. Look for Copilot's inline review comments (marked with the Copilot icon)
+3. For each comment:
+   - Read Copilot's explanation
+   - If the suggestion is correct, click **Apply suggestion** to create a commit
+   - If you disagree, click 👎 to provide feedback
+   - If you need more investigation, note it for @workspace analysis
+
+**Benefits of Native Suggestions:**
+- ✅ One-click fixes create commits automatically
+- ✅ Suggestions are visible to all collaborators
+- ✅ Applied changes are tracked in the PR history
+
+---
+
+### 2. Deep Dive with @workspace
+
+For issues that need more investigation, use @workspace in VS Code:
 
 **GitHub Copilot Chat Prompt:**
-
-```
-@workspace I'm reviewing modified-files/data-agents.md which has significant updates.
-
-[Open and share the modified data-agents.md file]
 
 Perform a detailed review checking:
 
@@ -100,7 +123,7 @@ For each issue found, provide:
 
 ---
 
-### 2. Review New Tutorial Content
+### 3. Review New Tutorial Content
 
 **GitHub Copilot Chat Prompt:**
 
@@ -166,7 +189,7 @@ Specifically check:
 
 ---
 
-### 3. Validate Cross-References
+### 4. Validate Cross-References
 
 **GitHub Copilot Chat Prompt:**
 
@@ -207,7 +230,7 @@ List all broken or potentially broken references with:
 
 ---
 
-### 4. Check Style and Formatting Consistency
+### 5. Check Style and Formatting Consistency
 
 **GitHub Copilot Chat Prompt:**
 
@@ -266,7 +289,7 @@ Generate a checklist of issues found with file references.
 
 ---
 
-### 5. Verify Code Examples Functionality
+### 6. Verify Code Examples Functionality
 
 **GitHub Copilot Chat Prompt:**
 
@@ -320,7 +343,7 @@ For Shell/Bash examples:
 
 ---
 
-### 6. Check for Version Consistency
+### 7. Check for Version Consistency
 
 **GitHub Copilot Chat Prompt:**
 
@@ -353,7 +376,7 @@ Create a table showing all version references with consistency assessment.
 
 ---
 
-### 7. Assess Overall Content Quality
+### 8. Assess Overall Content Quality
 
 **GitHub Copilot Chat Prompt:**
 
@@ -709,7 +732,8 @@ Use Copilot for each pass with specific prompts.
 
 You've completed this task when you:
 
-- ✅ Reviewed all high-priority files identified in Task 2.1
+- ✅ Applied Copilot's one-click suggestions from native review
+- ✅ Reviewed all high-priority files identified in Task 3.1
 - ✅ Found and documented technical accuracy issues
 - ✅ Validated all cross-references and links
 - ✅ Checked style and formatting consistency
@@ -733,7 +757,7 @@ You've completed this task when you:
 
 ## What's Next?
 
-After completing detailed review, move to **Task 2.3** where you'll use GitHub Copilot to generate constructive, professional feedback for the PR author.
+After completing detailed review, move to **Task 3.3** where you'll use GitHub Copilot to generate constructive, professional feedback for the PR author.
 
 ---
 

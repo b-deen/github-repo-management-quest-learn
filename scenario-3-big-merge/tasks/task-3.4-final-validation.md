@@ -1,29 +1,38 @@
-# Task 2.4: Final Validation and Cross-Reference Checking with GitHub Copilot
+# Task 3.4: Final Validation and Cross-Reference Checking with GitHub Copilot
 
 **Duration:** 15 minutes
 **Difficulty:** Intermediate
-**GitHub Copilot Features:** @workspace, cross-file analysis, impact detection
+**GitHub Copilot Features:** Native Copilot Code Review, @workspace, cross-file analysis, Copilot Coding Agent
 
 ## Objective
 
-Perform final validation checks on PR #127 using GitHub Copilot's @workspace capabilities to identify cross-file impacts, validate all references, run automated checks, and compile your complete review for submission.
+Perform final validation checks on the PR using GitHub Copilot's native review features and @workspace capabilities to identify cross-file impacts, validate all references, run automated checks, and compile your complete review for submission.
 
 ## Context
 
 You've reviewed content in detail and generated feedback. Before submitting your review, you need to:
-- Verify nothing was missed
+- Verify nothing was missed (check Copilot's native suggestions)
 - Check cross-file impacts beyond the PR
 - Validate all internal and external references
 - Run automated quality checks
 - Compile everything into a final review
+- (Optional) Assign remaining fixes to Copilot Coding Agent
+
+## Native Features for Final Validation
+
+| Feature | Use Case |
+|---------|----------|
+| **Copilot Code Review** | Verify all inline suggestions have been addressed |
+| **Copilot Coding Agent** | Assign remaining issues for Copilot to fix automatically |
+| **@workspace** | Cross-file impact analysis across the repository |
 
 GitHub Copilot's @workspace agent excels at cross-file analysis - finding impacts and dependencies you might miss when reviewing files individually.
 
 ## Setup
 
 1. **Have all your review materials ready:**
-   - `pr-review.md` (from Tasks 2.1 and 2.2)
-   - `pr-feedback.md` (from Task 2.3)
+   - `pr-review.md` (from Tasks 3.1 and 3.2)
+   - `pr-feedback.md` (from Task 3.3)
 
 2. **Open VS Code with full repository context:**
    ```bash
@@ -350,16 +359,16 @@ Flag anything that looks suspicious.
 ```
 @workspace Based on all my validation work:
 
-Initial Review (Task 2.1):
+Initial Review (Task 3.1):
 [Summary of findings]
 
-Detailed Review (Task 2.2):
+Detailed Review (Task 3.2):
 [Summary of findings]
 
-Feedback Generated (Task 2.3):
+Feedback Generated (Task 3.3):
 [Summary of issues]
 
-Final Validation (Task 2.4):
+Final Validation (Task 3.4):
 [Recent findings]
 
 Create a comprehensive final review summary that:
@@ -811,16 +820,17 @@ You've completed this task when you:
 
 ---
 
-## Scenario 2 Complete!
+## Scenario 3 Complete!
 
 Congratulations! You've completed all four PR review tasks using GitHub Copilot:
 
-- ✅ Task 2.1: High-level PR review with @workspace
-- ✅ Task 2.2: Detailed content review with inline Copilot
-- ✅ Task 2.3: Generated constructive feedback
-- ✅ Task 2.4: Final validation and cross-file analysis
+- ✅ Task 3.1: Native Copilot Code Review + initial assessment with @workspace
+- ✅ Task 3.2: Detailed content review with inline Copilot
+- ✅ Task 3.3: Generated constructive feedback
+- ✅ Task 3.4: Final validation and cross-file analysis
 
 **You've learned to use GitHub Copilot for:**
+- **Native code review** on GitHub.com with one-click fixes
 - Repository-wide PR impact analysis
 - Technical accuracy validation
 - Cross-reference checking
@@ -831,13 +841,12 @@ Congratulations! You've completed all four PR review tasks using GitHub Copilot:
 
 ## What's Next?
 
-Ready for the final scenario? Move to **[Scenario 3: The Backlog Battle](../../scenario-3-backlog-battle/README.md)**
+Ready for the final scenario? Move to **[Scenario 4: Agent Arsenal](../../scenario-4-agent-arsenal/README.md)**
 
-You'll learn to use GitHub Copilot for:
-- Bulk issue categorization and triage
-- Finding duplicate issues
-- Creating issue templates
-- Automating simple fixes (issue-to-PR workflow)
+You'll learn about:
+- Native GitHub Copilot features (Coding Agent, auto-reviews)
+- Custom instructions for repository-specific behavior
+- When and how to build custom agents
 - Using GitHub's native "assign to Copilot" feature
 
 ---
