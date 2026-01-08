@@ -12,6 +12,20 @@ Welcome to **Part 2** of the GitHub Copilot Repository Management Quest! This se
 
 ## Before You Start: Prerequisites Checklist
 
+### ✅ Sync Your Fork (Important!)
+
+If you completed Part 1 in an earlier session, **sync your fork** to get the latest updates before starting Part 2:
+
+1. Go to your fork on **GitHub.com**
+2. Look for the banner: "This branch is X commits behind..."
+3. Click **Sync fork** → **Update branch**
+4. In VS Code, pull the changes:
+   ```bash
+   git pull
+   ```
+
+> **Why sync?** The quest content is regularly updated. Syncing ensures you have the latest task files, fixes, and improvements.
+
 ### ✅ Setup from Part 1
 
 Ensure you have the following from Part 1:
