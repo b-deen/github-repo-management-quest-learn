@@ -91,14 +91,13 @@ Ask Copilot for an overall recommendation:
 
 ```
 #pr Based on this PR, provide a preliminary assessment: should it be approved, request changes, or needs major work? What are the top 3 concerns?
-```
 
 **Create `pr-review.md`** with your findings:
 - PR Overview (what it does)
 - High-risk files identified
 - Quality issues found
 - Preliminary recommendation
-
+```
 ---
 
 ## Success Criteria
